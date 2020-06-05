@@ -1,0 +1,165 @@
+<div class="container-fluid">
+
+	<!-- REGISTRATION FORM -->
+	<div class="panel panel-default">
+		
+		<div class="panel-heading">
+			<span class="lead">Event Registration </span>
+		</div>
+		
+		<div class="form-style">
+			<form data-ng-submit="ctrl.submitFunc()" name="myForm"
+				class="form-horizontal">
+
+				<div class="row" data-ng-show="ctrl.event.status == 'COMPLETED'">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable">&nbsp;</label>
+						<div class="col-md-7" style='color: red;'>
+							Cannot update completed event.
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" data-ng-show="ctrl.selectedEventId">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="event.eventId">Event ID</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.event.eventId" name="eventId"
+								class="form-control input-md eventId" disabled />
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="event.name">Name</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.event.name" name="name"
+								class="form-control input-md name" placeholder="Enter event name"
+								data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.name.$touched && myForm.name.$error.required"> This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="event.ce">CE</label>
+						<div class="col-md-3">
+							<select data-ng-model="ctrl.event.ce" name="ce"
+								class="form-control input-md ce"
+								data-ng-options="ce for ce in ctrl.ces" data-ng-required='true'>
+							</select>
+							<div class="has-error">
+								<span data-ng-show="myForm.ce.$touched && myForm.ce.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="event.type">Type</label>
+						<div class="col-md-3">
+							<select data-ng-model="ctrl.event.type" name="type"
+								class="form-control input-md type"
+								data-ng-options="t.text for t in ctrl.types" data-ng-required='true'>
+							</select>
+							<div class="has-error">
+								<span data-ng-show="myForm.type.$touched && myForm.type.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="speaker">Speaker</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.event.speaker"
+								name="speaker" class="form-control input-md speaker"
+								placeholder="Enter speaker" data-ng-required='true'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.speaker.$touched && myForm.speaker.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="location">Location</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.event.location"
+								name="location" class="form-control input-md location"
+								placeholder="Enter location" data-ng-required='true'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.location.$touched && myForm.location.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="startTimeStamp">Start
+							Time</label>
+						<div class="col-md-3">
+							<input type="datetime-local" data-ng-model="ctrl.event.startTimeStamp"
+								name="startTimeStamp"
+								class="form-control input-md" data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.startTimeStamp.$touched && myForm.startTimeStamp.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="endTimeStamp">End
+							Time</label>
+						<div class="col-md-3">
+							<input type="datetime-local" data-ng-model="ctrl.event.endTimeStamp"
+								name="endTimeStamp"
+								class="form-control input-md" data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.endTimeStamp.$touched && myForm.endTimeStamp.$error.required"> This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="row" data-ng-hide="ctrl.event.status == 'COMPLETED'">
+					<div class="form-group col-md-12">
+						<div class="floatCenter">
+							<input type="submit"
+								value="{{!ctrl.event.eventId ? 'Add' : 'Update'}}"
+								class="btn btn-primary btn-md"
+								data-ng-disabled="myForm.$invalid">
+							<button data-ng-hide="ctrl.selectedEventId"
+								type="button" data-ng-click="ctrl.resetFunc()"
+								class="btn btn-clear btn-md"
+								data-ng-disabled="myForm.$pristine">Clear</button>
+						</div>
+					</div>
+				</div>
+								
+			</form>
+		</div>
+	</div>
+	
+	<!-- style={position:'fixed' & top:'75px'}
+     Even if you scroll the page all the way down or shrink the page height, message will display at the same position.
+     To position the stacking order of elements place this code below form elements
+	-->
+	<div data-ng-show="ctrl.alertMsg">
+		<div class='container alertMsg'>{{ctrl.alertMsg}}</div>
+	</div>
+
+</div>
+
+

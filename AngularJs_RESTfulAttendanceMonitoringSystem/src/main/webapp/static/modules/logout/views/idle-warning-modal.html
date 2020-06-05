@@ -1,0 +1,21 @@
+<div class="idle-warning-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">{{ pc.title }}</h3>
+	</div>
+	<div data-idle-countdown="countdown" data-ng-init="countdown=30"
+		class="modal-body" id="modal-body">
+		<uib-progressbar max="5" value="5" animate="false"
+			class="progress-striped active">You'll be logged
+		out in {{countdown}} second(s).</uib-progressbar>
+	</div>
+	<hr/>
+	<div class="flex">
+		<div class="flex-item">
+			<button class="btn btn-primary modalButton" data-ng-click="ok()">OK</button>
+		</div>
+		<div class="flex-item">
+			<button class="btn btn-basic modalButton" data-ng-click="cancel()">Cancel</button>
+		</div>			
+	</div>
+	<br/>
+</div>

@@ -1,0 +1,53 @@
+<div data-ng-controller="HomeController as ctrl">
+	<div data-permission="['ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_MEDTECH']">
+	 	<a href="#!/home" data-ng-class="{active: ctrl.isActive('/home')}">Home</a>
+	 </div> 
+	<div data-permission="['ROLE_ADMIN']">
+		<a href="#!/registerEmployee/0" data-ng-class="{active: ctrl.isActive('/registerEmployee/0')}">Register Employee</a>
+	</div> 
+	<div data-permission="['ROLE_ADMIN']"> 
+	 	<a href="#!/registerEvent/0" data-ng-class="{active: ctrl.isActive('/registerEvent/0')}">Register Event</a> 
+	 </div>
+	<div data-permission="['ROLE_ADMIN']">
+	 	<a href="#!/employees" data-ng-class="{active: ctrl.isActive('/employees')}">List Employees</a>
+	 </div>
+	<div data-permission="['ROLE_SUPERVISOR']">
+	 	<a href="#!/employees_per_supervisor" data-ng-class="{active: ctrl.isActive('/employees_per_supervisor')}">Subordinates</a>
+	</div>			    
+	<div data-permission="['ROLE_ADMIN']">	
+		<a href="#!/events" data-ng-class="{active: ctrl.isActive('/events')}">List Events</a> 
+	</div>
+	<div data-permission="['ROLE_ADMIN']">
+		<a href="#!/attendance_listEvents" data-ng-class="{active: ctrl.isActive('/attendance_listEvents')}">Attendance</a> 	
+		<!-- Attendance tab will first take you to the pending_events page where you can press 'attendance' button to take attendance --> 
+	</div>   		    
+	<div data-permission="['ROLE_MEDTECH']">
+		<a href="#!/events_by_employee" data-ng-class="{active: ctrl.isActive('/events_by_employee')}">My Events</a> 								
+	</div> 
+	<div data-permission="['ROLE_ADMIN', 'ROLE_SUPERVISOR', 'ROLE_MEDTECH']">
+		<a href="#!/email" data-ng-class="{active: ctrl.isActive('/email')}">Send Email</a>
+	</div>			    
+	<div>
+		<div data-ng-controller="LogoutController as ctrl">
+			<a data-ng-click="ctrl.signOut()">Sign Out</a>
+		</div>	
+	</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>	
+	<div>&nbsp;</div>	
+</div>

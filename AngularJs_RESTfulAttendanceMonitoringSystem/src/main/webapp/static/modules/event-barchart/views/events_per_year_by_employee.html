@@ -1,0 +1,63 @@
+<div class="container-fluid" data-ng-controller="BarchartController as ctrl">
+	
+	<div class="panel panel-default">
+		
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<table>			
+				<tr>
+					<td class="col-md-11">{{ctrl.selectedEmployee.firstname}} {{ctrl.selectedEmployee.lastname}}</td>
+					<td class="col-md-11">FY{{ ctrl.selectedYear }} 
+						<button class="btn btn-clear" style='border: 1px solid lightgray' data-ng-click='ctrl.downloadFileFunc()'>
+							<span class='glyphicon glyphicon-save-file'></span>
+						</button>
+					</td>
+				</tr>				
+				<tr>
+					<td class="col-md-11">ID# {{ctrl.selectedEmployeeId}}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="tablecontainer">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>CE Credits</th>
+						<th>Type</th>
+						<th>Speaker</th>
+						<th>Location</th>
+						<th>Duration</th>
+						<th>StartTime</th>
+						<th>EndTime</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="event in ctrl.events_per_year_by_employee">
+						<td><span data-ng-bind="event.eventId"></span></td>
+						<td><span data-ng-bind="event.name"></span></td>
+						<td><span data-ng-bind="event.ce"></span></td>
+						<td><span data-ng-bind="event.event_type"></span></td>
+						<td><span data-ng-bind="event.speaker"></span></td>
+						<td><span data-ng-bind="event.location"></span></td>
+						<td><span data-ng-bind="event.duration"></span></td>
+						<td>{{event.startTimeStamp | DateFilter }}</td>
+						<td>{{event.endTimeStamp | DateFilter }}</td>
+					</tr>
+					<tr>
+						<td><b>Number of Events:</b></td>
+						<td><b>{{ctrl.totalEvents}}</b></td>
+					</tr>
+					<tr>
+						<td><b>Total CEs:</b></td>
+						<td><b>{{ctrl.totalCEs}}</b></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+

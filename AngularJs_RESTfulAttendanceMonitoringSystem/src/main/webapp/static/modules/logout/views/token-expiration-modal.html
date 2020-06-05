@@ -1,0 +1,16 @@
+<div class="idle-warning-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">Your session has expired. You will be logged out!</h3>
+	</div>
+	<div data-idle-countdown="countdown" data-ng-init="countdown=10"
+		class="modal-body" id="modal-body">
+		<uib-progressbar max="5" value="5" animate="false"
+			class="progress-striped active">You'll be logged
+		out in {{countdown}} second(s).</uib-progressbar>
+	</div>
+	<hr/>
+	<div style='text-align: center'>
+		<button class="btn btn-primary modalButton" data-ng-click="ok()">OK</button>
+	</div>
+	<br/>
+</div>

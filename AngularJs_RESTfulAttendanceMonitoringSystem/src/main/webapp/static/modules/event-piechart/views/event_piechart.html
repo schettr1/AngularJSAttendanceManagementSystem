@@ -1,0 +1,47 @@
+<div class="container-fluid">
+	
+	<div class="panel panel-default">
+
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">Statistics</span>
+		</div>
+		
+		<div class="container-fluid">
+			<table class="table">
+				<tr>
+					<td>Event #ID:</td><td>{{ctrl.event.eventId}}</td>
+				</tr>
+				<tr>
+					<td>Event Name:</td><td>{{ctrl.event.name}}</td>
+				</tr>
+				<tr>
+					<td>No. of Attendee:</td><td>{{ctrl.male + ctrl.female + ctrl.other}}</td>
+				</tr>
+				<tr>
+					<td>Day Shift:</td><td>{{ctrl.day}}</td>
+				</tr>
+				<tr>
+					<td>Evening Shift:</td><td>{{ctrl.evening}}</td>
+				</tr>
+				<tr>
+					<td>Night Shift:</td><td>{{ctrl.night}}</td>
+				</tr>
+				<tr>
+					<td>Male:</td><td>{{ctrl.male}}</td>
+				</tr>
+				<tr>
+					<td>Female:</td><td>{{ctrl.female}}</td>
+				</tr>
+				<tr>
+					<td>Gender(Other):</td><td>{{ctrl.other}}</td>
+				</tr>
+				<tr>
+					<td><div id='pieChartByShift'></div></td><td><div id='pieChartByGender'></div></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+

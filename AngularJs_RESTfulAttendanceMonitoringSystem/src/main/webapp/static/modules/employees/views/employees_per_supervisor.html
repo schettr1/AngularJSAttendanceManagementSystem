@@ -1,0 +1,45 @@
+<div class="container-fluid">
+	   
+   <div class="panel panel-default">
+      
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+      	<span class="lead">Subordinates </span>
+      </div>
+      
+      <div class="tablecontainer">
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th data-ng-click='ctrl.sortColumn("employee.employeeId")' data-ng-class='ctrl.sortClass("employee.employeeId")'>ID</th>
+                      <th data-ng-click='ctrl.sortColumn("employee.firstname")' data-ng-class='ctrl.sortClass("employee.firstname")'>Firstname</th>
+                      <th data-ng-click='ctrl.sortColumn("employee.lastname")' data-ng-class='ctrl.sortClass("employee.lastname")'>Lastname</th>
+                      <th data-ng-click='ctrl.sortColumn("employee.email")' data-ng-class='ctrl.sortClass("employee.email")'>Email</th>
+                      <th data-ng-click='ctrl.sortColumn("employee.employee_type")' data-ng-class='ctrl.sortClass("employee.employee_type")'>Role</th>
+                      <th data-ng-click='ctrl.sortColumn("employee.shift")' data-ng-class='ctrl.sortClass("employee.shift")'>Shift</th>
+                      <th>Status</th>
+                      <th>Events</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr data-ng-repeat="employee in ctrl.supervisor_employees | orderBy: ctrl.column: ctrl.reverse ">
+                      <td>{{employee.employeeId}}</td>
+                      <td>{{employee.firstname}}</td>
+                      <td>{{employee.lastname}}</td>
+                      <td>{{employee.email}}</td>
+                      <td>{{employee.employee_type}}</td>
+                      <td>{{employee.shift}}</td>
+                      <td>{{employee.enabled ? 'Active' : 'inActive'}}</td>
+                      <td>
+                       <button data-ng-click="ctrl.eventsPerYearByEmployeeFunc(employee.employeeId)" 
+                       			class="btn btn-clear btn btn-outline-primary btn-lg custom-width">
+                       			<span class="glyphicon glyphicon-folder-open"></span>
+                       </button>
+                      </td>	                       
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+   </div>
+ </div>
+

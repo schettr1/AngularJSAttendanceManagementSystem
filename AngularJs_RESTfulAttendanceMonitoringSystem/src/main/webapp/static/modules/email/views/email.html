@@ -1,0 +1,122 @@
+<div class="container-fluid">
+
+	<div class="panel panel-default">
+	
+		<div class="panel-heading">
+			<span class="lead">Send Email</span>
+		</div>
+		
+		<div class="form-style">
+			<form name="emailForm"
+				class="form-horizontal" enctype="multipart/form-data">
+			
+				<div class="row" data-ng-hide='true'>
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="from">From:</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.jsonData.from"
+								name="from" class="form-control input-sm from" disabled />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="to">To:</label>
+						<div class="col-md-7">
+							<input type="text" 
+								data-ng-model="ctrl.jsonData.to" 
+								class="form-control input-sm to" 
+								data-ng-keyup="ctrl.autoCompleteFunc(ctrl.jsonData.to)"
+								name="to" 
+								required />
+							<ul data-ng-show="ctrl.updatedEmailList.length > 0" class="list-group">
+								<li class="list-group-item" data-ng-repeat="_email in ctrl.updatedEmailList" 
+									data-ng-click="ctrl.fillTextboxFunc(_email)">{{_email}}
+								</li>
+							</ul>
+							<input type="hidden" 
+								data-ng-model="ctrl.employees.employee" 
+								class="form-control input-sm to" />
+							<div hidden="true" class="has-error"
+								data-ng-show="emailForm.$dirty">
+								<span data-ng-show="emailForm.to.$error.required"> This
+									is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="subject">Subject:</label>
+						<div class="col-md-7">
+							<input type="text" data-ng-model="ctrl.jsonData.subject"
+								name="subject" class="form-control input-sm subject" required />
+							<div hidden="true" class="has-error"
+								data-ng-show="emailForm.$dirty">
+								<span data-ng-show="emailForm.subject.$error.required">
+									This is a required field</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="text">Text:</label>
+						<div class="col-md-7">
+							<textarea data-ng-model="ctrl.jsonData.text" name="text"
+								class="form-control input-sm text" style="height: 140px"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="file">Attachment(s):</label>											      		
+						<div class="col-md-4" style='float:left;'>
+							<input type="file" 
+					               data-ngf-select 
+					               data-ng-model="ctrl._files" 
+					               data-ngf-max-size="2MB" 
+					               data-ngf-model-invalid="errorFile"
+					               accept="image/*" 
+					               multiple /> 				               
+				           	<div data-ng-show="emailForm.$error.maxSize">
+					        	<i style="color:red';">File(s) too large. Max file-size allowed is 2MB</i>
+					      	</div>			      	
+						</div>	
+						<span data-ng-click="ctrl._files = null" data-ng-show="ctrl._files.length>0" style='float:left;color:red;'><b>X</b></span>										
+					</div>
+				</div>				
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div class="col-md-offset-2 col-md-9">
+							<button class="btn btn-primary"
+									data-ng-click="ctrl.sendEmailFunc(ctrl._files)"
+									data-ng-disabled="maxSizeError || emailForm.$invalid">Send ></button>
+							<span>
+								<button class="btn btn" data-ng-click="ctrl.resetFunc()"
+								style="width:70px; margin-left: 10px;">Clear</button>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				
+			</form>
+		</div>
+	</div>
+	
+	<!-- style={position:'fixed' & top:'75px'}
+     Even if you scroll the page all the way down or shrink the page height, message will display at the same position.
+     To position the stacking order of elements place this code below form elements
+	-->
+	<div data-ng-show="ctrl.alertMsg">
+		<div class='container alertMsg'>{{ctrl.alertMsg}}</div>
+	</div>
+		
+</div>
+

@@ -1,0 +1,33 @@
+<div class="container-fluid" data-ng-controller="BarchartController as ctrl">
+	
+	<div class="panel panel-default">
+
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<table>			
+				<tr>
+					<td class="col-md-11">Name: {{ctrl.selectedEmployee.firstname}} {{ctrl.selectedEmployee.lastname}}</td>
+					<td>FY{{ ctrl.selectedYear }}</td>
+				</tr>				
+				<tr>
+					<td class="col-md-11">Employee ID: {{ctrl.selectedEmployeeId}}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="container-fluid">
+
+			<div id='myChart'></div>
+
+		</div>
+		<div>
+			<b>Number of Events: {{ctrl.totalEvents}}</b>
+		</div>
+		<div>
+			<b>Total CEs: {{ctrl.totalCEs}}</b>
+		</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,110 @@
+<div class="container-fluid">
+
+	<div>
+		<br />
+	</div>
+
+	<div>
+		<select class="form-control" style="width: 20%;"
+			data-ng-model="ctrl.selectedEventStatus"
+			data-ng-options="option for option in ctrl.eventsStatus"
+			data-ng-change="ctrl.selectEventStatusFunc(ctrl.selectedEventStatus)">
+		</select>
+	</div>
+
+	<div>
+		<br />
+	</div>
+
+	<div class="panel panel-default">
+	
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">List of Events </span>
+		</div>
+		
+		<div class="tablecontainer">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th data-ng-click='ctrl.sortColumn("event.eventId")' data-ng-class='ctrl.sortClass("event.eventId")'>ID</th>
+						<th data-ng-click='ctrl.sortColumn("event.name")' data-ng-class='ctrl.sortClass("event.name")'>Name</th>
+						<th data-ng-click='ctrl.sortColumn("event.ce")' data-ng-class='ctrl.sortClass("event.ce")'>CE Credits</th>
+						<th data-ng-click='ctrl.sortColumn("event.type")' data-ng-class='ctrl.sortClass("event.type")'>Type</th>
+						<th data-ng-click='ctrl.sortColumn("event.speaker")' data-ng-class='ctrl.sortClass("event.speaker")'>Speaker</th>
+						<th data-ng-click='ctrl.sortColumn("event.location")' data-ng-class='ctrl.sortClass("event.location")'>Location</th>
+						<th data-ng-click='ctrl.sortColumn("event.duration")' data-ng-class='ctrl.sortClass("event.duration")'>Duration</th>
+						<th data-ng-click='ctrl.sortColumn("event.startTimeStamp")' data-ng-class='ctrl.sortClass("event.startTimeStamp")'>StartTime</th>
+						<th data-ng-click='ctrl.sortColumn("event.endTimeStamp")' data-ng-class='ctrl.sortClass("event.endTimeStamp")'>EndTime</th>
+						<th data-ng-click='ctrl.sortColumn("event.status")' data-ng-class='ctrl.sortClass("event.status")'>Status</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>Statistics</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						data-ng-repeat="event in ctrl.events_per_page | orderBy: ctrl.column: ctrl.reverse ">
+						<td><span data-ng-bind="event.eventId"></span></td>
+						<td><span data-ng-bind="event.name"></span></td>
+						<td><span data-ng-bind="event.ce"></span></td>
+						<td><span data-ng-bind="event.type"></span></td>
+						<td><span data-ng-bind="event.speaker"></span></td>
+						<td><span data-ng-bind="event.location"></span></td>
+						<td><span data-ng-bind="event.duration"></span></td>
+						<td>{{event.startTimeStamp | DateFilter }}</td>
+						<td>{{event.endTimeStamp | DateFilter }}</td>
+						<td><span data-ng-bind="event.status"></span></td>
+						<td>
+							<button type="button"
+								data-ng-click="ctrl.editFunc(event.eventId)"
+								class="btn btn-clear btn-outline-primary btn-lg custom-width"><span class="glyphicon glyphicon-edit"></span></button>
+						</td>
+						<td>
+							<button type="button"
+								data-ng-click="ctrl.removeFunc(event.eventId)"
+								data-ng-disabled="{{event.status === 'PENDING' ? 'false' : 'true' }}"
+								class="btn btn-clear btn-outline-danger btn-lg custom-width"><span class="glyphicon glyphicon-remove"></span></button>
+						</td>
+						<td>
+							<button type="button"
+								data-ng-click="ctrl.calcShiftPerEventFunc(event.eventId)"
+								data-ng-disabled="{{event.status === 'PENDING' ? 'true' : 'false' }}"
+								class="btn btn-clear btn-outline-info btn-lg custom-width"><span class="glyphicon glyphicon-stats"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+    <!-- PAGINATION -->
+	<ul data-ng-if="ctrl.pager.pages.length" class="pagination">
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(1)">First</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo - 1)">Previous</a>
+		</li>
+		<li data-ng-repeat="pageNo in ctrl.pager.pages" data-ng-class="{active : ctrl.pager.currentPageNo === pageNo}">
+			<a data-ng-click="ctrl.setPage(pageNo)">{{pageNo}}</a>
+		</li>                
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo + 1)">Next</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.totalPages)">Last</a>
+		</li>
+	</ul>
+	
+	<!-- style={position:'fixed' & top:'75px'}
+     Even if you scroll the page all the way down or shrink the page height, message will display at the same position.
+     To position the stacking order of elements place this code below form elements
+	-->
+	<div data-ng-show="ctrl.alertMsg">
+		<div class='container alertMsg'>{{ctrl.alertMsg}}</div>
+	</div>
+				
+</div>
+
+

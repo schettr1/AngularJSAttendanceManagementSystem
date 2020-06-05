@@ -1,0 +1,291 @@
+/******* LOGIN PAGE *******/
+.container_login {
+	text-align: center;
+	margin-left: 250px;          /* compensate for width: 75% content when navbar is hidden */
+}
+.center_login {
+	display: inline-block;
+	width: 35%;                 
+	margin-top: 100px;
+}
+.alertSessionExpiry {
+	text-align: center;
+	margin-left: 250px;         /* compensate for width: 75% content when navbar is hidden */
+	margin-top: 20px;
+    color: white;
+    background-color: #CD5C5C;
+    padding: 15px;
+    border-radius: 6px;
+}
+	
+/****** ALERT MESSAGE *******/
+.alertMsg {
+	position: fixed; 
+	top: 120px;
+	text-align: center;
+    color: white;
+    background-color: #CD5C5C;
+    opacity: .9;
+    padding: 15px;
+    border-radius: 6px;
+}	
+		
+/******* HEADER/FOOTER *******/
+.app-container {
+   display: flex; /* level up the height of children div */
+}
+.header {
+   position: fixed;
+   width: 100%;
+   top: 0;
+   background: #4682B4;
+   color: white;
+   z-index: 999;
+}
+.footer {
+   position: fixed;
+   width: 100%;
+   bottom: 0;
+   background: lightslategray;
+   color: white;
+   z-index: 999;
+}
+.navbar {
+	margin-top: 120px;
+	margin-bottom: 80px;
+	width: 16%;
+	float: left;
+  	background-color: CadetBlue;
+}			
+.content {
+	margin-top: 120px;
+	margin-bottom: 80px;
+	width: 84%;
+	float: right;
+}
+.navbar a {
+  color: white;
+  display: block;
+  padding: 12px;
+  font-size: 20;
+  text-decoration: none!important;
+}	
+
+.navbar a:hover {
+  font-size: 20;
+  font-weight: bold;
+  color: white;
+  backgroud-color: black;
+}	
+		
+.navbar a.active {
+  background-color: DarkCyan;
+  color: white;
+  font-size: 20;
+  font-weight: bold;
+}
+
+
+/******* HOME PAGE *******/
+.table-borderless {
+    border: none;
+}
+
+/******* REGISTER FORMS *******/		
+.has-error {
+	color: red;
+	text-align: left;
+}
+    
+						
+/******* ZING CHART - BAR CHART *******/
+.form-style {
+	margin-left: 50px;
+	margin-top: 30px;
+}
+		
+/******* ZING CHART - BAR CHART *******/
+#myChart {
+    width: 1000px;
+    height: 450px;
+}	 
+zing-grid[loading] {
+    height: 800px;
+}	
+
+
+/******* ZING CHART - PIE CHART *******/
+#pieChartByGender, #pieChartByShift {
+    width: 525px;
+    height: 450px;
+}	 
+zing-grid[loading] {
+    height: 800px;
+}
+      
+/******* ATTENDANCE - ROUNDED SWITCH CHECKBOX *******/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}			
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}			
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}			
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}			
+input:checked + .slider {
+  background-color: #3CB371;
+}			
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}			
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+/******* ROUND SLIDERS *******/
+.slider.round {
+  border-radius: 34px;
+}			
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/******* MODAL *******/				
+.modal-header, .modal-body {
+  text-align: center;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+}
+.flex-item + .flex-item {
+  margin-left: 10px;
+}
+.modalButton {
+  width: 60px;
+}
+/****** LOGOUT BUTTON ******/
+a {
+  cursor:pointer; 
+}	
+
+/******* TOGGLE ASCCENDING/DESCENDING ORDER *******/			
+.arrow-down:after,.arrow-up:after {
+	content: ' ';
+	position: relative;
+	left: 2px;
+	border: 8px solid transparent;
+}			
+.arrow-down:after {
+	top: 10px;
+	border-top-color: black;
+}			
+.arrow-up:after {
+	bottom: 15px;
+	border-bottom-color: black;
+}			
+.arrow-down,.arrow-up {
+ padding-right: 10px;
+}	  
+
+
+/******* PASSWORD RESET *******/
+.container_passwordreset {
+	text-align: center;
+	margin-left: 250px;          /* compensate for width: 75% content when navbar is hidden */
+}
+.center_passwordreset {
+	display: inline-block;
+	width: 45%;                 
+	margin-top: 100px;
+	border: .5px solid SteelBlue; 
+	border-radius: 4px;
+}
+
+
+/******* LOGGED USER CHANGE PASSWORD *******/
+.container_loggedUserChangePassword {
+	text-align: center;
+}
+.center_loggedUserChangePassword {
+	display: inline-block;
+	width: 40%;                 
+	margin-top: 100px;
+	border: .5px solid SteelBlue; 
+	border-radius: 4px;
+}
+
+
+/******* EMAIL *******/
+/*max-height vs height;*/
+.list-group {
+	max-height: 200px;         
+	overflow: hidden; 
+	overflow-y: scroll;
+}
+.list-group-item:hover {
+	cursor: pointer;
+	background-color: WhiteSmoke;
+}
+
+
+/****** BTN-OUTLINE-* ********/
+/*Bootstrap button outline is provided by v4 and not v3 */
+.btn-outline-primary {
+    background-color: transparent;
+    color: inherit;
+    transition: all .2s;
+    color: #428bca;
+}
+.btn-outline-success {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    color: #5cb85c;
+}
+.btn-outline-info {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    color: #5bc0de;
+}
+.btn-outline-warning {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    color: #f0ad4e;
+}
+.btn-outline-danger {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+    color: #d9534f;
+}

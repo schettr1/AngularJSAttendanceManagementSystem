@@ -1,0 +1,51 @@
+<div class="container-fluid">
+
+	<div class="panel panel-default">
+
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">Profile </span>
+		</div>
+		<div class="tablecontainer">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>ID:</td><td><span data-ng-bind="ctrl.employee.employeeId"></span></td>
+					</tr>
+					<tr>
+						<td>Firstname:</td><td><span data-ng-bind="ctrl.employee.firstname"></span></td>
+					</tr>
+					<tr>
+						<td>Lastname:</td><td><span data-ng-bind="ctrl.employee.lastname"></span></td>
+					</tr>
+					<tr>
+						<td>Email:</td><td><span data-ng-bind="ctrl.employee.email"></span></td>
+					</tr>
+					<tr>
+						<td>Birth:</td><td>{{ctrl.employee.birth | BirthFilter}}</td>
+					</tr>
+					<tr>
+						<td>Gender:</td><td><span data-ng-bind="ctrl.employee.gender"></span></td>
+					</tr>					
+					<tr>
+						<td>Address:</td><td><span data-ng-bind="ctrl.employee.address"></span></td>
+					</tr>
+					<tr>
+						<td>Shift:</td><td><span data-ng-bind="ctrl.employee.shift"></span></td>
+					</tr>
+					<tr>
+						<td>Type:</td><td><span data-ng-bind="ctrl.employee.employee_type"></span></td>
+					</tr>										
+				</tbody>
+			</table>															
+		</div>
+	</div>
+	
+	<button type="button"
+		data-ng-click="ctrl.editFunc(ctrl.employee.employeeId)"
+		class="btn btn-primary custom-width">Update
+	</button>	
+		
+</div>
+
+

@@ -1,0 +1,66 @@
+<!-- EXPIRED SESSION NOTIFICATION -->
+<div data-ng-if="ctrl.isRefreshTokenExpired">
+	<div class="alertSessionExpiry">{{ctrl.sessionExpiredMsg}}</div>
+</div>
+
+<!-- LOGIN FORM -->
+<div class="container_login">	
+	<div class="center_login">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="background-color: #4682B4">
+				<span class="lead">Login </span>
+			</div>
+			
+			<div class="container-fluid">
+				<form name="loginForm" data-ng-submit="ctrl.authenticateUser()" >
+	
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-4"></label>
+							<div class="col-md-8">
+								<div data-ng-show="ctrl.flag_failedLogin" style="color: red; margin-top: 10px; text-align: left;">invalid username or password</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-4" for="username">Username:</label>
+							<div class="col-md-8">
+								<input type="text" data-ng-model="ctrl.username"
+									name="username" class="form-control input-sm username"
+									placeholder="username" />
+							</div>
+						</div>
+					</div>
+	
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-4" for="password">Password:</label>
+							<div class="col-md-8">
+								<input type="password" data-ng-model="ctrl.password"
+									name="password" class="form-control input-sm password"
+									placeholder="password" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">						
+						<button type="submit"
+							class="btn btn-primary"
+							>Login</button>
+						<img data-ng-if="ctrl.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />						
+					</div>
+					
+					<br/>
+					
+					<div class="row">
+						<a href="#!/reset_password_link" >Don't remember password?</a>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</div>

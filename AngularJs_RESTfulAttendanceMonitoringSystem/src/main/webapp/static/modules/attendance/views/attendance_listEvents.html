@@ -1,0 +1,94 @@
+<div class="container-fluid">
+
+	<div>
+		<br />
+	</div>
+
+	<div>
+		<select class="form-control" style="width: 20%; float: left;" 
+			data-ng-model="ctrl.selected_event"
+			data-ng-options="option for option in ctrl.event_options"
+			data-ng-change="ctrl.selectEventStatusFunc(ctrl.selected_event)">
+		</select>
+					
+		<input type="text" class="form-control"
+			placeholder="Search..." 
+			style="width: 40%; float: right;" 
+			data-ng-model="ctrl.searchText"
+			data-ng-change="ctrl.onSearchTextFunc(ctrl.searchText)" />
+			
+	</div>
+
+	<div style="clear: both;">
+		<br />
+	</div>
+
+
+	<div class="panel panel-default">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<span class="lead">List Events </span>
+		</div>
+		<div class="tablecontainer">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th data-ng-click='ctrl.sortColumn("ev.eventId")' data-ng-class='ctrl.sortClass("ev.eventId")'>ID</th>
+						<th data-ng-click='ctrl.sortColumn("ev.name")' data-ng-class='ctrl.sortClass("ev.name")'>Name</th>
+						<th data-ng-click='ctrl.sortColumn("ev.ce")' data-ng-class='ctrl.sortClass("ev.ce")'>CE Credits</th>
+						<th data-ng-click='ctrl.sortColumn("ev.type")' data-ng-class='ctrl.sortClass("ev.type")'>Type</th>
+						<th data-ng-click='ctrl.sortColumn("ev.status")' data-ng-class='ctrl.sortClass("ev.status")'>Status</th>
+						<th data-ng-click='ctrl.sortColumn("ev.speaker")' data-ng-class='ctrl.sortClass("ev.speaker")'>Speaker</th>
+						<th data-ng-click='ctrl.sortColumn("ev.location")' data-ng-class='ctrl.sortClass("ev.location")'>Location</th>
+						<th data-ng-click='ctrl.sortColumn("ev.duration")' data-ng-class='ctrl.sortClass("ev.duration")'>Duration</th>
+						<th data-ng-click='ctrl.sortColumn("ev.startTimeStamp")' data-ng-class='ctrl.sortClass("ev.startTimeStamp")'>StartTime</th>
+						<th data-ng-click='ctrl.sortColumn("ev.endTimeStamp")' data-ng-class='ctrl.sortClass("ev.endTimeStamp")'>EndTime</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="ev in ctrl.events_per_page | orderBy: ctrl.column: ctrl.reverse ">
+						<td><span data-ng-bind="ev.eventId"></span></td>
+						<td><span data-ng-bind="ev.name"></span></td>
+						<td><span data-ng-bind="ev.ce"></span></td>
+						<td><span data-ng-bind="ev.type"></span></td>
+						<td><span data-ng-bind="ev.status"></span></td>
+						<td><span data-ng-bind="ev.speaker"></span></td>
+						<td><span data-ng-bind="ev.location"></span></td>
+						<td><span data-ng-bind="ev.duration"></span></td>
+						<td><span data-ng-bind="ev.startTimeStamp"></span></td>
+						<td><span data-ng-bind="ev.endTimeStamp"></span></td>
+
+						<td>
+							<button type="button"
+								data-ng-click="ctrl.selectEventForAttendanceFunc(ev.eventId, ev.status)"
+								class="btn btn-primary btn-sm custom-width">{{ev.status
+								| statusFilter }}</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<!-- PAGINATION -->
+	<ul data-ng-if="ctrl.pager.pages.length" class="pagination">
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(1)">First</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo - 1)">Previous</a>
+		</li>
+		<li data-ng-repeat="pageNo in ctrl.pager.pages" data-ng-class="{active : ctrl.pager.currentPageNo === pageNo}">
+			<a data-ng-click="ctrl.setPage(pageNo)">{{pageNo}}</a>
+		</li>                
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo + 1)">Next</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.totalPages)">Last</a>
+		</li>
+	</ul>
+				
+</div>
+

@@ -1,0 +1,101 @@
+
+<div class="container-fluid">
+
+	<div>
+		<br />
+	</div>
+
+	<div>
+		<select class="form-control" style="width: 20%;" 
+			data-ng-model="ctrl.selectedEmployeeType"
+			data-ng-options="option for option in ctrl.employeeTypes"
+			data-ng-change="ctrl.employeesByTypeFunc(ctrl.selectedEmployeeType)">
+		</select>
+	</div>
+
+	<div>
+		<br />
+	</div>
+
+	<div class="">
+		<div class="panel panel-default">
+
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">List of Employees </span>
+			</div>
+			<div class="tablecontainer">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th data-ng-click='ctrl.sortColumn("employee.employeeId")' data-ng-class='ctrl.sortClass("employee.employeeId")'>ID</th>
+							<th data-ng-click='ctrl.sortColumn("employee.firstname")' data-ng-class='ctrl.sortClass("employee.firstname")'>Firstname</th>
+							<th data-ng-click='ctrl.sortColumn("employee.lastname")' data-ng-class='ctrl.sortClass("employee.lastname")'>Lastname</th>
+							<th data-ng-click='ctrl.sortColumn("employee.email")' data-ng-class='ctrl.sortClass("employee.email")'>Email</th>
+							<th data-ng-click='ctrl.sortColumn("employee.employee_type")' data-ng-class='ctrl.sortClass("employee.employee_type")'>Type</th>
+							<th data-ng-click='ctrl.sortColumn("employee.shift")' data-ng-class='ctrl.sortClass("employee.shift")'>Shift</th>
+							<th>Status</th>
+							<th>Edit</th>
+							<th>Toggle</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="employee in ctrl.employees_per_page | orderBy: ctrl.column: ctrl.reverse ">
+							<td><span data-ng-bind="employee.employeeId"></span></td>
+							<td><span data-ng-bind="employee.firstname"></span></td>
+							<td><span data-ng-bind="employee.lastname"></span></td>
+							<td><span data-ng-bind="employee.email"></span></td>
+							<td><span data-ng-bind="employee.employee_type"></span></td>
+							<td><span data-ng-bind="employee.shift"></span></td>
+							<td>{{employee.enabled == true ? 'Active' : 'inActive' }}</td>
+							<td>
+								<button type="button"
+									data-ng-click="ctrl.editFunc(employee.employeeId)"
+									class="btn btn-clear btn btn-outline-primary btn-lg custom-width"><span class="glyphicon glyphicon-edit"></span></button>
+							</td>
+							<td>
+								<button type="button"
+									data-ng-click="ctrl.changeStatusFunc(employee.employeeId)"
+									data-ng-class="employee.enabled ? 'btn btn-clear btn btn-outline-success btn-lg custom-width' : 'btn btn-clear btn btn-outline-danger btn-lg custom-width'">
+										<span data-ng-class="employee.enabled ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"></span>
+								</button>							
+							</td>
+						</tr>
+					</tbody>
+				</table>															
+			</div>
+		</div>
+	</div>
+	
+	<!-- PAGINATION -->
+	<ul data-ng-if="ctrl.pager.pages.length" class="pagination">
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(1)">First</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === 1}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo - 1)">Previous</a>
+		</li>
+		<li data-ng-repeat="pageNo in ctrl.pager.pages" data-ng-class="{active : ctrl.pager.currentPageNo === pageNo}">
+			<a data-ng-click="ctrl.setPage(pageNo)">{{pageNo}}</a>
+		</li>                
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.currentPageNo + 1)">Next</a>
+		</li>
+		<li data-ng-class="{disabled : ctrl.pager.currentPageNo === ctrl.pager.totalPages}">
+			<a data-ng-click="ctrl.setPage(ctrl.pager.totalPages)">Last</a>
+		</li>
+	</ul>	
+	
+	
+	<!-- style={position:'fixed' & top:'75px'}
+     Even if you scroll the page all the way down or shrink the page height, message will display at the same position.
+     To position the stacking order of elements place this code below form elements
+	-->
+	<div data-ng-show="ctrl.alertMsg">
+		<div class='container alertMsg'>{{ctrl.alertMsg}}</div>
+	</div>
+	
+	
+</div>
+
+

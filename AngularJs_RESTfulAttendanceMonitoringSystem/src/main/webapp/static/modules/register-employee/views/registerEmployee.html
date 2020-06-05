@@ -1,0 +1,253 @@
+<div class="container-fluid">
+
+	<!-- REGISTRATION FORM -->
+	<div class="panel panel-default">
+		
+		<div class="panel-heading">
+			<span class="lead">Employee Registration </span>
+		</div>
+
+				
+		<div class="form-style">
+				
+			<form data-ng-submit="ctrl.submitFunc($event)" name="myForm"
+				class="form-horizontal">
+				
+				<div class="row" data-ng-show="ctrl.employee.enabled == false">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable">&nbsp;</label>
+						<div class="col-md-7" style='color: red;'>
+							Cannot update inActive employee information.
+						</div>
+					</div>
+				</div>
+
+				<div class="row" data-ng-show="ctrl.selectedEmployeeId != undefined">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="employeeId">Employee ID</label>
+						<div class="col-md-7">
+							<input type="text" 
+								data-ng-disabled="ctrl.selectedEmployeeId != undefined"
+								data-ng-model="ctrl.employee.employeeId"								
+								name="employeeId" class="form-control input-md employeeId"
+								placeholder="Enter employeeId"/>
+						</div>
+					</div>
+				</div>
+				
+				<!-- data-ng-disabled = "!ctrl.loggedUserRoles.include('ROLE_ADMIN') || loggedUserId != ctrl.employee.employeeId" -->
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="firstname">Firstname</label>
+						<div class="col-md-7">
+							<input type="text" 
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.firstname"
+								name="firstname" class="form-control input-md firstname"
+								placeholder="Enter firstname" data-ng-required='true'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.firstname.$touched && myForm.firstname.$error.required">This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="lastname">Lastname</label>
+						<div class="col-md-7">
+							<input type="text" 
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.lastname"
+								name="lastname" class="form-control input-md lastname"
+								placeholder="Enter lastname" data-ng-required='true'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.lastname.$touched && myForm.lastname.$error.required">This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="email">Email</label>
+						<div class="col-md-7">
+							<input type="email"  
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.email" 
+								name="email" class="form-control input-md email"
+								placeholder="Enter email" data-ng-required='true' 
+								data-ng-pattern='ctrl.email_pattern'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.email.$touched && myForm.email.$error.required">This is a required field</span>
+								<span data-ng-show="myForm.email.$touched && myForm.email.$error.email">Not a valid email</span>
+								<span data-ng-show="myForm.email.$touched && !myForm.email.$error.email && myForm.email.$error.pattern">Not a valid domain</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="employee_type">Type</label>
+						<div class="col-md-3">
+							<select  
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.employee_type"
+								name="employee_type" class="form-control input-md role"
+								data-ng-options="role for role in ctrl.roles" data-ng-required='true'>
+							</select>
+							<div class="has-error">
+								<span data-ng-show="myForm.employee_type.$touched && myForm.employee_type.$error.required">This is a required field</span>
+								<span data-ng-show="ctrl.error_flag">{{ctrl.error_activesupervisor}}</span>
+								<span data-ng-show ="ctrl.flag_activeSupervisor">{{ctrl.error_activeSupervisor}}</span>	  								
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="birth">DOB</label>
+						<div class="col-md-3">
+							<input type="date"  
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.birth"
+								name="birth" class="form-control input-md birth" data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.birth.$touched && myForm.birth.$error.required">This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="gender">Gender</label>
+						<div class="col-md-3">
+							<select  
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.gender" name="gender"
+								class="form-control input-md gender"
+								data-ng-options="gender for gender in ctrl.genders" data-ng-required='true'>
+							</select>
+							<div class="has-error">
+								<span data-ng-show="myForm.gender.$touched && myForm.gender.$error.required">This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="shift">Shift</label>
+						<div class="col-md-3">
+							<select  
+								data-ng-disabled = "!(ctrl.loggedUserRoles.includes('ROLE_ADMIN') || ctrl.loggedUserId != ctrl.employee.employeeId)"
+								data-ng-model="ctrl.employee.shift" name="shift"
+								class="form-control input-md shift"
+								data-ng-options="shift for shift in ctrl.shifts" data-ng-required='true'>
+							</select>
+							<div class="has-error">
+								<span data-ng-show="myForm.shift.$touched && myForm.shift.$error.required">This is a required field</span> 
+								<span data-ng-show="ctrl.flag_activeSupervisorShiftChange">{{ctrl.error_activeSupervisorShiftChange}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="address">Address</label>
+						<div class="col-md-7">
+							<input type="text"  
+								data-ng-model="ctrl.employee.address"
+								name="address" class="form-control input-md address"
+								placeholder="Enter address" data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.address.$touched && myForm.address.$error.required">This is a required field</span> 
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="username">Username</label>
+						<div class="col-md-7">
+							<input type="text" 
+								data-ng-model="ctrl.employee.username"
+								data-ng-disabled="ctrl.selectedEmployeeId != undefined"
+								name="username" class="form-control input-md username"
+								placeholder="Enter username" data-ng-required='true' />
+							<div class="has-error">
+								<span data-ng-show="myForm.username.$touched && myForm.username.$error.required">This is a required field</span>
+								<span data-ng-show ="ctrl.flag_existsUsername">{{ctrl.error_existsUsername}}</span>					
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="password">Password</label>
+						<div class="col-md-7">
+							<input type="password" 
+								data-ng-model="ctrl.employee.password"
+								data-ng-disabled="ctrl.selectedEmployeeId != undefined"
+								name="password" class="form-control input-md"
+								placeholder="Enter password" data-ng-required='true' data-ng-pattern='ctrl.password_pattern'/>
+							<div class="has-error">
+								<span data-ng-show="myForm.password.$touched && myForm.password.$error.required">This is a required field</span> 
+								<span data-ng-show="myForm.password.$touched && myForm.password.$error.pattern">Password must begin with a letter, 
+									and length must be between 4 and 14 digits</span> 
+							</div>
+						</div>						
+					</div>
+				</div>
+
+				<div data-ng-hide="(ctrl.loggedUser.employeeId != ctrl.selectedEmployeeId)"
+					 class="row">
+					 <label class="col-md-2 control-lable"></label>
+					<div>
+						<a href="/AngularJs_RESTfulAttendanceMonitoringSystem/#!loggeduser_change_password?selectedEmployeeId={{ctrl.employee.employeeId}}" >change password?</a>				
+					</div>
+				</div>
+				
+				<br/>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<div class="floatCenter">
+							<input type="submit"
+								data-ng-show="!ctrl.employee.employeeId || ctrl.employee.enabled == true"
+								value="{{!ctrl.selectedEmployeeId ? 'Add' : 'Update'}}"
+								class="btn btn-primary btn-md"
+								data-ng-disabled="myForm.$invalid || myForm.$pristine">
+								<!-- 'myForm.$invalid' disables 'Add/Update' when an error/flag is displayed on form data -->
+								<!-- 'myForm.$pristine' disables 'Update' when update employee info is loaded on the form but no change has been made -->
+							<button type="button" 
+								data-ng-hide="{{ctrl.selectedEmployeeId}}"
+								data-ng-click="ctrl.resetFunc()"
+								class="btn btn-basic btn-md"
+								data-ng-disabled="myForm.$pristine">Clear</button>
+						</div>
+					</div>
+				</div>
+				
+			</form>			
+		</div>
+	</div>
+
+	
+	<!-- style={position:'fixed' & top:'75px'}
+     Even if you scroll the page all the way down or shrink the page height, message will display at the same position.
+     To position the stacking order of elements place this code below form elements
+	-->
+	<div data-ng-show="ctrl.alertMsg">
+		<div class='container alertMsg'>{{ctrl.alertMsg}}</div>
+	</div>
+	
+</div>
+
+
