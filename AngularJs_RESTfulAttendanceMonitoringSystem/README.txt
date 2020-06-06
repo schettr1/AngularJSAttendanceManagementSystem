@@ -98,7 +98,7 @@ Employee whose status is inActive or disabled is cannot be updated.
   5. Enable new supervisor.
     		
 
-/********************* EMPLOYEE ATTENDANCE SYSTEM ***************************/ 
+/********************* ATTENDANCE MANAGEMENT SYSTEM ***************************/ 
 
 EMPLOYEE is a parent class. ADMIN, SUPERVISOR and MEDTECH are children class.
 Therefore, ADMIN, SUPERVISOR and MEDTECH inherits properties from EMPLOYEE class.
