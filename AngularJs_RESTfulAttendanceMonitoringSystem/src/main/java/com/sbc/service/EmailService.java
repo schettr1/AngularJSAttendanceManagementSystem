@@ -27,13 +27,16 @@ public class EmailService {
 	 * In Springboot, one jar "spring-boot-starter-mail" will do the magic!
 	 */
 
-	@Autowired
-	private JavaMailSender javaMailSender; /* used for sending MimeMessage */
 
 
 	/* MailSender is used for sending SimpleMailMessage only, it is not usable to send 'html/text' so use JavaMailSender instead */
 	@Autowired
 	private MailSender mailSender; 
+	
+	
+	/* used for sending MimeMessage */
+	@Autowired
+	private JavaMailSender javaMailSender; 
 	
 	
 	@Value("${spring.mail.username}")		

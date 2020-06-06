@@ -38,7 +38,24 @@ If refresh_token is expired user is logged out.
 
 
 FORGOT PASSWORD - 
-To be continued soon...
+1. User clicks on forgot password link.
+2. Front-end application (Client) returns "reset_password_link" page.
+3. User submits valid email.
+4. Client sends GET request to "/reset-password?email=xyz@gmail.com"
+5. Server verifies email exists, generate token and send link to rest password to the email.
+6. User signs into gmail account. 
+7. User clicks on the link to reset password.
+8. User sends GET request to "/verify-change-password-token?token=eyJ...6Ag"
+9. Server verifies token validity and expiration.
+10. Retrieve username from the token.
+11. Retrieve employee by using that username.
+12. Server returns employee to the client and client returns "change_password_form" page to the User.
+13. User submits new password.
+14. Client sends POST request to "/token-based-update-password" with employee = {employeeId: '', username: '', password: new_password}
+15. Server verifies the employee.
+16. Server encodes password using BCryptPasswordEncoder() and updates password to the database.
+17. Server returns response status 200 and client returns message "Your password has been updated. Please sign in again!" to the user.
+
    		
    		
 (NOTE: There can be multiple supervisors in a shift but there can be only one active supervisor for any shift at any given time)
@@ -96,39 +113,22 @@ EMPLOYEES has many-to-many relation with EVENTS and has one-to-many relation wit
 Use CascadeType.REMOVE only in relation between EMPLOYEES and ROLES as this will also remove roles if employee is removed.
 Use FetchType.LAZY as it will improve performance when loading child classes.
 
-HOW ITS DONE IN THE BACK-END ???
+UPDATE EMPLOYEE ??
+i. ROLE CHANGED -
+1. Medtech to Admin
+2. Medtech to Supervisor
 
-To convert ADMIN to MEDTECH:
-Create Medtech object and copy attributes from Admin to Medtech, delete the Admin object and save the Medtech object. 
+3. Admin to Medtech
+4. Admin to Supervisor
 
-To convert MEDTECH to ADMIN:
-Create Admin object and copy attributes from Medtech to Admin, delete the Medtech object and save the Admin object.
+5. Supervisor to Admin
+6. Supervisor to Medtech
 
-To convert MEDTECH to SUPERVISOR: 
-Create Supervisor object and copy contents of Medtech to Supervisor, delete the Medtech object and save the Supervisor
-object. If there is an existing supervisor for that shift, then you must first find all subordinates of that existing 
-supervisor and then for each subordinate update the supervisor and finally inactivate the existing supervisor.
-# Check if existing supervisor name is SUPERVISOR_DAY/SUPERVISOR_EVENING/SUPERVISOR_NIGHT, 
-  YES - change role to SUPERVISOR of that shift and copy all subordinates from SUPERVISOR_DAY/SUPERVISOR_EVENING/SUPERVISOR_NIGHT of
-  that shift to new supervisor.
-  NO- respond with 'Supervisor already exist'
-   
-To convert ADMIN to SUPERVISOR:
-Create Supervisor object and copy contents of Admin to Supervisor, delete the Admin object and save the Supervisor object. 
-If there is an existing supervisor for that shift, then you must first find all subordinates of that existing supervisor 
-and then for each subordinate update the supervisor and finally inactivate the existing supervisor.
+ii. ONLY SHIFT CHANGED -
+1. Medtech to Medtech
+2. Admin to Admin
+3. Supervisor to Supervisor
 
-To convert SUPERVISOR to ADMIN/MEDTECH:
-Find whether that supervisor is inactive or not. Only allow inactive supervisors to be converted.  
-Active supervisors cannot be converted. In order to convert active supervisors, first replace their position by creating new supervisor or
-by changing admin/medtech to supervisor of that shift. As a result, the current supervisor becomes inactive and can be converted. You can 
-create dummy/temp supervisor if current supervisor leaves or is converted to another type and there is no replacement supervisor.
-
-Only when changing status of SUPERVISOR from inactive to active, the existing supervisor will become inactive whereas inactive supervisor(new) 
-will become active. And all the subordinates or old supervisor will be transferred to the new supervisor. If you update inactive
-supervisor (something like address, date of birth etc), it will not become the current supervisor. It will still exist as inactive supervisor.
-However, if you update inactive supervisor to medtech and then update again to supervisor, then it will be current supervisor and the existing
-supervisor will become inactive.
 
 /******** FRONT-END *********/ 
 1. Employee status won't change from inactive(disabled) to active(enabled) by updating employee information. To enable employee, Admin must change 

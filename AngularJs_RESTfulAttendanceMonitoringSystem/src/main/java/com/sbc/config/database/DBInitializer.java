@@ -23,8 +23,8 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
  *
  */
 
-//@Configuration
-//@PropertySource(value = { "classpath:application.properties" })
+@Configuration
+@PropertySource(value = { "classpath:application.properties" })
 public class DBInitializer {
 
 	 
