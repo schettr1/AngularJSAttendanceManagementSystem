@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href='<c:url value="/static/css/style.css"/>' >
 	<link rel="stylesheet" type="text/css" href="<c:url value="/static/css/bootstrap-3.3.7.min.css" />">
 		
-	<!-- Libraries -->	
+	<!-- Vendor Libraries -->	
 	<script type="text/javascript" src="<c:url value="/static/lib/jquery-3.3.1.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/static/lib/bootstrap-3.3.7.min.js" />"></script>
     <script type="text/javascript" src="<c:url value="/static/lib/angular-1.7.8.min.js" />"></script>
@@ -27,7 +27,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-idle/1.3.2/angular-idle.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script> 	
     
-	<!-- Services --> 
+	<!-- Common Services --> 
 	<script type="text/javascript" src='<c:url value="/static/app.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/static/service/httpInterceptor.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/static/service/base64Service.js" />'></script> 
@@ -39,7 +39,7 @@
 	<script type="application/json" src='<c:url value="/static/service/properties.js" />'></script>  
 	<script type="application/json" src='<c:url value="/static/data/data.json" />'></script>
 	
-	<!-- Modules -->
+	<!-- Modules (containing Controllers & Services) -->
 	<script type="text/javascript" src='<c:url value="/static/modules/register-employee/app.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/static/modules/register-employee/employeeService.js" />'></script>
 	<script type="text/javascript" src='<c:url value="/static/modules/register-employee/employeeController.js" />'></script>

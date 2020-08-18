@@ -5,6 +5,12 @@
  * zingchart-angularjs --> zingchart
  * ui.bootstrap --> $uibModal
  * ngIdle --> IdleProvider
+ * 
+ * THIS IS APP-MODULE. YOU CAN LOAD OTHER MODULES LIKE SHOWN HERE OR DYNAMICALLY LOAD
+ * OTHER MODULES ON DEMAND BY USING REQUIREJS. 
+ * INCLUDE <script>/require.js</script> IN INDEX FILE AND THEN DECLARE 
+ * DEPENDENCIES UNDER 'paths' OF EACH MODULE AND LOAD YOUR
+ * SUB-MODULES INSIDE APP.JS
  */ 
 
 var app = angular.module('app-module', [  'register-event-module', 'events-module', 'register-employee-module', 'employees-module',

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet Filter implementation class CORSFilter
+ * Servlet Filter implementation class CORSFilter - define CORSFilter in web.xml file
  * CORS stands for Cross Origin Resource Sharing. It is a mechanism that allows JavaScript (AngularJs or ReactJs) application to make 
  * AJAX requests to another domain, different from the domain from where it originated. By default, such web requests are forbidden in 
  * browsers, and they will result into same origin security policy errors. Using Java CORS filter, you may allow the webpage to make 

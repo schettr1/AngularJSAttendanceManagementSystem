@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.sbc.entity.Email;
 import com.sbc.exception.FileUploadException;
 import com.sbc.exception.InvalidEmailException;
@@ -58,7 +60,10 @@ public class EmailController {
 	private JWTUtil jwtUtil; 	
 	
 	@Autowired
-	private PropertiesUtil util;
+	private PropertiesUtil propertiesUtil;
+	
+	@Autowired  
+    JmsTemplate jmsTemplate; 
 	
 	private static final Logger LOG = LoggerFactory.getLogger(EmailController.class); 
 
@@ -78,8 +83,9 @@ public class EmailController {
 		// convert String to JSON Object
 		Email email = new ObjectMapper().readValue(jsonString, Email.class);
 
-		String[] filesLocation = new String[files.length];
 		File[] savedFiles = new File[files.length];
+		String[] filesLocation = new String[files.length];
+		
 		double totalFileBytes = 0;
 		
 		if(files.length > 10) {
@@ -121,15 +127,8 @@ public class EmailController {
 					num++;
 				}
 			}			
-			emailService.EmailwithAttachment(email, filesLocation);
-			
-			// Delete files from fileLocation
-			Thread.sleep(4000);	// allow 4 seconds for email to be sent					
-			for(int i=0; i<savedFiles.length; i++) {	
-			    savedFiles[i].delete();
-			}
-		} 
-		
+			emailService.EmailwithAttachment(email, savedFiles, filesLocation);						
+		} 		
 		else {
 			System.out.println("files.length() == 0");
 			emailService.EmailOnly(email);
@@ -151,12 +150,12 @@ public class EmailController {
 		LOG.info("enter sendPasswordResetLink() method.");
 
 		//Employee6 emp = employeeService.findEmployeeByEmail(email);   use this line if every employees email login-credentials were available to the server
-		Employee6 emp = employeeService.findEmployeeByEmail(util.getEmail());			
+		Employee6 emp = employeeService.findEmployeeByEmail(propertiesUtil.getEmail());			
 		
 		String urlToResetPassword = null;
 		
 		if(emp != null) {				
-			LOG.info("email=" + util.getEmail());
+			LOG.info("email=" + propertiesUtil.getEmail());
 			String username = emp.getUsername();
 			LOG.info("username=" + username);
 			final UserDetails userDetails = userDetailsService.loadUserByUsername(username);		// call method
@@ -165,19 +164,33 @@ public class EmailController {
 			
 			urlToResetPassword = "http://localhost:8080/AngularJs_RESTfulAttendanceMonitoringSystem/#!/change_password_form/" + access_token;			
 		}	
-			
-		String urlLink = "<p>If you have not requested to reset your password, then ignore this email.</p>"
-				+ "<p>Click on the link below to reset your password. This link will expire in 2 mins.</p> \r\n" + 
-				"<a href='" + urlToResetPassword + "'>" + urlToResetPassword + "</a>";
+				
+		String urlLink =
+		"<p>If you have not requested to reset your password, then ignore this email.</p>"
+		+
+		"<p>Click on the link below to reset your password. This link will expire in 2 mins.</p> \r\n"
+		+ "<a href='" + urlToResetPassword + "'>" + urlToResetPassword + "</a>";
 		LOG.info("link=" + urlLink);
-
+		
 		Email emailEntity = new Email();
-		emailEntity.setFrom(util.getEmail());
-		emailEntity.setTo(util.getEmail());
-		emailEntity.setSubject("Password reset link");
-		emailEntity.setText(urlLink);
-		emailService.EmailOnly(emailEntity);
-			
+		emailEntity.setFrom(propertiesUtil.getEmail());
+		emailEntity.setTo(propertiesUtil.getEmail());
+		emailEntity.setSubject("Password reset link"); emailEntity.setText(urlLink);
+		//emailService.EmailOnly(emailEntity);
+		 	
+		
+		/* 
+         * Message can be sent through JMS in text or String only. 
+         * Using MessageConverter can be complicated sometimes. 
+         * Therefore, use GSON to convert java object to json string.  
+         * Java Object = Email [from=suchettri1@gmail.com, to=suny4evers@hotmail.com, message=Hello Mister!, date=Wed Aug 05 14:12:06 EDT 202           0] 
+         * jsonString = {"from":"suchettri1@gmail.com","to":"suny4evers@hotmail.com","message":"Hello Mister!","date":"Aug 5, 2020 2:12:06 PM           "} 
+         */       
+        Gson gson = new Gson();  
+        String jsonString = gson.toJson(emailEntity);  
+        jmsTemplate.convertAndSend(jsonString);   
+        System.out.println("<Email Object> jsonString = " + jsonString);             
+        
 		return ResponseEntity.status((HttpStatus.OK)).body(null);		
 	}	
 	
