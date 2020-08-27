@@ -50,7 +50,7 @@ public class EmailService {
 	
 	
 	@Value("${spring.mail.username}")		
-	private String my_gmail;
+	private String gmail_username;
     
 	
 	
@@ -65,8 +65,8 @@ public class EmailService {
 		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);		// set 'true' to change 'plain/text' to 'html/text'
 		//mimeMessageHelper.setFrom(email.getFrom());
 		//mimeMessageHelper.setTo(email.getTo());
-		mimeMessageHelper.setFrom(my_gmail);
-		mimeMessageHelper.setTo(my_gmail);
+		mimeMessageHelper.setFrom(gmail_username);
+		mimeMessageHelper.setTo(gmail_username);
 		mimeMessageHelper.setSubject(email.getSubject());
 		mimeMessageHelper.setText(email.getText(), true);		// set 'true' to change 'plain/text' to 'html/text'		
 		try {
@@ -89,8 +89,8 @@ public class EmailService {
 		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);		// set 'true' to change 'plain/text' to 'html/text'
 		//mimeMessageHelper.setFrom(email.getFrom());
 		//mimeMessageHelper.setTo(email.getTo());
-		mimeMessageHelper.setFrom(my_gmail);
-		mimeMessageHelper.setTo(my_gmail);
+		mimeMessageHelper.setFrom(gmail_username);
+		mimeMessageHelper.setTo(gmail_username);
 		mimeMessageHelper.setSubject(email.getSubject());
 		mimeMessageHelper.setText(email.getText(), true);		// set 'true' to change 'plain/text' to 'html/text'
 		for (String fileLocation : filesLocation) {
@@ -117,7 +117,7 @@ public class EmailService {
      * {commandId = 5, responseRequired = true, messageId = "", ..., jmsXGroupFirstForConsumer = false, text = 111} )
      */  
     @JmsListener(destination = PASSWORD_RESET_LINK_QUEUE)
-	public void PasswordResetEmail(Message jmsMessage) throws Exception {
+	public void sendPasswordResetEmail(Message jmsMessage) throws Exception {
     	
     	try {  
     		Thread.sleep(10000);
