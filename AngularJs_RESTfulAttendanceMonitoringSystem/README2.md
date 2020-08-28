@@ -55,17 +55,17 @@ If refresh_token is expired user is logged out.
 * User clicks on forgot password link.
 * Front-end application (Client) returns "reset_password_link" page.
 * User submits valid email.
-* Client sends GET request to "/reset-password?email=xyz@gmail.com"
+* Client sends GET request to path "/reset-password?email=xyz@gmail.com"
 * Server verifies email exists, generate token and send link to rest password to the email.
 * User signs into gmail account. 
 * User clicks on the link to reset password.
-* User sends GET request to "/verify-change-password-token?token=eyJ...6Ag"
+* Client sends GET request to path ``` /verify-change-password-token?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJseWRpYSIsInNjb3BlcyI6WyJST0xFX0FETUlOIl0sImlzcyI6IkF1dGhvcml6YXRpb25fU2VydmVyIiwiaWF0IjoxNTY2ODUyNTkwLCJleHAiOjE1NjY4NTI2MDV9.lVO47xquwNP-M9Qha1TcoS9ErQSj9OB-d7NGOpJ7Uu9IvL53X-vX5O9GOSwzovAe83VR1D5HAsv3YGhBbXTpdg ``` 
 * Server verifies token validity and expiration.
 * Retrieve username from the token.
 * Retrieve employee by using that username.
 * Server returns employee to the client and client returns "change_password_form" page to the User.
 * User submits new password.
-* Client sends POST request to "/token-based-update-password" with employee = {employeeId: '', username: '', password: new_password}
+* Client sends POST request to path ``` "/token-based-update-password" ``` with ``` employee = {employeeId: '', username: '', password: new_password} ```
 * Server verifies the employee.
 * Server encodes password using BCryptPasswordEncoder() and updates password to the database.
 * Server returns response status 200 and client returns message "Your password has been updated. Please sign in again!" to the user.
@@ -80,7 +80,7 @@ Employee whose status is inActive or disabled is cannot be updated.
 ## CREATE NEW ADMIN - 
   * Enable and save new admin.
  
-# CREATE NEW MEDTECH - 
+## CREATE NEW MEDTECH - 
   * Find supervisor of that shift
   * Add supervisor to new medtech.
   * Enable and save new medtech.
@@ -172,11 +172,11 @@ In Controller.js use map() function to retrieve data.
 		empId = parseInt($routeParams.empId);          ---------> for receiving parameter
 ```
 
-* Difference between ```properties data-ng-show='!ctrl.employee.enabled' ``` and ```properties data-ng-show='ctrl.employee.enabled == false' ``` 
-First one will display element when ```properties employee.enabled == false || employee.enabled == undefined ``` 
-Second one will show element only when ```properties employee.enabled == false ```
+* Difference between ``` data-ng-show='!ctrl.employee.enabled' ``` and ``` data-ng-show='ctrl.employee.enabled == false' ``` 
+First one will display element when ``` employee.enabled == false || employee.enabled == undefined ``` 
+Second one will show element only when ``` employee.enabled == false ```
 
-* For file upload use 'ng-file-upload'. Follow instructions in this link (https://github.com/danialfarid/ng-file-upload)
+* For file upload use 'ng-file-upload'. Follow instructions in this link https://github.com/danialfarid/ng-file-upload
 
 
 
