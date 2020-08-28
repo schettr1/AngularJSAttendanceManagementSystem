@@ -2,15 +2,18 @@
 
 Let's define dataSource inside the Tomcat Server.
 
-1. Add the following lines of code in context.xml 
+* Add the following lines of code in context.xml 
 
+```bash
 	<ResourceLink   
 	  name="jdbc/j4s"   
 	  global="jdbc/j4s"   
 	  type="javax.sql.DataSource"/>  
+```
 
-2. Add the following lines of code in server.xml (must be placed within <GlobalNamingResources/> tags)
+* Add the following lines of code in server.xml (must be placed within <GlobalNamingResources/> tags)
 
+```bash
 	<Resource auth="Container" 
 		name="jdbc/j4s" 
 		global="jdbc/j4s" 
@@ -23,3 +26,4 @@ Let's define dataSource inside the Tomcat Server.
 		maxIdle="20" 
 		maxWait="10000" 
 		minIdle="5" />        
+```
