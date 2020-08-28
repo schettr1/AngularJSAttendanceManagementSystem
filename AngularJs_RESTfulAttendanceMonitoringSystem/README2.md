@@ -172,8 +172,9 @@ In Controller.js use map() function to retrieve data.
 		empId = parseInt($routeParams.empId);          ---------> for receiving parameter
 ```
 
-* Difference between data-ng-show='!ctrl.employee.enabled' and data-ng-show='ctrl.employee.enabled == false'. First one will display 
-element when employee.enabled == false || employee.enabled == undefined. Second one will show element only when employee.enabled == false.
+* Difference between ```properties data-ng-show='!ctrl.employee.enabled' ``` and ```properties data-ng-show='ctrl.employee.enabled == false' ``` 
+First one will display element when ```properties employee.enabled == false || employee.enabled == undefined ``` 
+Second one will show element only when ```properties employee.enabled == false ```
 
 * For file upload use 'ng-file-upload'. Follow instructions in this link (https://github.com/danialfarid/ng-file-upload)
 
