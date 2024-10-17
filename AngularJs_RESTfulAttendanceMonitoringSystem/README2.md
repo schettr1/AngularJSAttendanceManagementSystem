@@ -1,7 +1,18 @@
 ## AUTHENTICATE USER - 
-When user sign in, username and password is encrypted [ var authdata = Base64Service.encode(username + ':' + password) ] and sent as http.POST request to url
-the server. Server authenticates the user credentials and returns a JSON data in the response. 
+When user logs in to the application, username and password is encoded using Base64Encoder ``` var authdata = Base64Service.encode(username + ':' + password) ``` and HTTP Post request is sent to the server. Server authenticates the user credentials and returns a JSON data in the response. 
 
+Service Endpoint -
+```bash 
+  REST_SERVICE_URI + '/authorize' 
+```
+
+Request Header -
+```bash
+    headers: { 
+	        	"Authorization": "Basic " + authdata 
+	      }
+```
+Response Payload -
 ```bash
 	{
 		access_token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJseWRpYSIsInNjb3BlcyI6WyJST0xFX0FETUlOIl0sImlzcyI6IkF1dGhvcml6YXRpb25fU2VydmVyIiwiaWF0IjoxNTY2ODUwMzg0LCJleHAiOjE1NjY4NTAzOTl9.AV3LYUFCClSi5Ccqxf8yPpzPiONNGaPLf1UYdeNvqSR46UqBye0WjkOYsM2oiCSsyjyR1B3DkwwuFLylL1eLuA',
